@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            font-size: 28px;
+            display: block;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="id"></div>
+    <button id="login1">login1</button>
+    <button id="login2">login2</button>
+    <button id="news">get news</button>
+    <button id="addNews">add news</button>
+    <script>
+        let login1 = document.getElementById("login1");
+        let login2 = document.getElementById("login2");
+        let news = document.getElementById("news");
+        let addnews = document.getElementById("addNews")
+        login1.onclick = () => {
+            fetch("https://localhost:44331/api/accounts/login",{
+            method: "POST",
+            body: {
+                username:"levandong",
+                password: "123"
+            },
+           headers:{
+            mode:"cors",
+            credentials: "include",
+            cors:true,
+            origin:true,
+            "Access-Control-Allow-Origin":"*",
+            "origin":"localhost"
+           }
+            })
+                .then(res => res.json)
+                .then(res => console.log(res.data))
+
+
+            
+        }
+
+
+        login2.onclick = () => {
+            fetch("https://localhost:44331/api/Accounts/login",{
+                method:"POST",
+                body:JSON.stringify({
+                    username:"a",
+                    password:"a"
+                }),
+
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
+                        'Access-Control-Allow-Origin': '*',
+                        'Accept': 'application/json' ,
+                        'origin':"localhost"
+                }
+            })
+            .then( res => res.json())
+            .then( resjson => console.log(resjson))
+        }
+
+        addnews.onclick = () => {
+            console.log("reaed cookie",document.cookie);
+             
+
+            fetch("https://localhost:44331/api/News",{
+                method: 'POST',
+                credentials: 'include',// để gửi côki
+                body:JSON.stringify( {
+                        title: "bai báo mới ngày 21",
+                        img: "sấ", 
+                        description: "sâs",
+                        cateId: '1',
+                        }),
+                        mode:"cors",
+                        headers: {
+                                'Content-Type': 'application/json; charset=utf-8',
+                                "origin":"http://abc.com",
+                                'Accept': 'application/json',
+                                "mode":"cors-anywhere"
+                                 }
+                })
+             .then(res => res.json())
+             .then(res => console.log(res.data))
+             .catch(err => console.log(err))
+            
+        }
+            
+        
+            
+    //     news.onclick = () => {
+    //         fetch("https://localhost:44331/api/news",{
+    //             body:{
+    //                 title: "abc",
+    //                 img: "a",
+    //                 description: "test"
+    //             },
+    //             method: 'POST',
+    //             headers:{
+    //                 CORS: "Policy1",
+    //                 "Access-Control-Allow-Origin":"*",
+    //                 "Access-Control-Max-Age":"POST, GET, OPTIONS, DELETE",
+    //                 "Access-Control-Max-Age": "3600",
+    //                 "Access-Control-Allow-Headers": "Content-Type, Origin, Cache-Control, X-Requested-With",
+    //                 "Access-Control-Allow-Credentials": "true"
+    //             },
+    //         credentials: 'include',
+    //         })
+    //             .then(res => res.json)
+    //             .then(res => console.log(res.data))
+
+    //         fetch("https://localhost:44315/json")
+    //             .then(res => res.json)
+    //             .then(res => console.log(res.data))
+
+    //         fetch("https://localhost:44331/api/accounts/notuse")
+    //             .then(res => res.json)
+    //             .then(res => console.log(res.data))    
+    //     }
+    // </script>
+</body>
+
+</html>
